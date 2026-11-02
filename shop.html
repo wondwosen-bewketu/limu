@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1f19">
+  <meta name="description" content="Take LIMU home — 100% Ethiopian roasted coffee, mugs and gift boxes.">
+  <title>LIMU Coffee — Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section class="shop-hero">
+    <div class="container shop-hero-grid">
+      <div>
+        <span class="demo-flag">● Demo store — no real payments</span>
+        <h1>Take <em>LIMU</em><br>home.</h1>
+        <p>The same 100% Ethiopian coffee we pour every day — roasted, sealed fresh and packed in our signature white pouch.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-gold" href="#products">Shop coffee</a>
+          <a class="btn btn-ghost" href="#story">Our origin</a>
+        </div>
+        <div class="perks">
+          <div class="perk"><i data-icon="fire"></i>Freshly roasted</div>
+          <div class="perk"><i data-icon="bean"></i>100% Ethiopian</div>
+          <div class="perk"><i data-icon="truck"></i>Pickup or delivery</div>
+          <div class="perk"><i data-icon="gift"></i>Gift ready</div>
+        </div>
+      </div>
+      <div class="shop-hero-art" aria-hidden="true">
+        <div class="halo"></div><div class="ring"></div>
+        <img class="bag" src="assets/images/bag.jpg" alt="">
+        <img class="mug" src="assets/images/mug.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Packed coffee &amp; merch</span>
+          <h2>The LIMU shelf</h2>
+          <p>Choose your size and grind — we'll have it ready.</p>
+        </div>
+      </div>
+      <div class="products" id="productGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="story" style="background:var(--cream)">
+    <div class="container story">
+      <div class="story-img reveal"><img src="assets/images/menu-shop-shelf.jpg" alt="LIMU coffee bags and mugs on the café shelf" loading="lazy"></div>
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--gold)">Origin</span>
+        <h2 class="h2">Named after the highlands of Limu</h2>
+        <p>Limu, in south-western Ethiopia, is known for clean, bright coffees grown at altitude. We roast in small batches to keep that character — floral, sweet and balanced.</p>
+        <div class="notes"><span>Jasmine</span><span>Citrus</span><span>Dark chocolate</span><span>Honey</span></div>
+        <div class="steps">
+          <div class="step"><b>01</b><div><strong>Pick your bag</strong><span>250 g, 500 g or a full kilo.</span></div></div>
+          <div class="step"><b>02</b><div><strong>Choose a grind</strong><span>Whole bean, jebena-fine, or espresso.</span></div></div>
+          <div class="step"><b>03</b><div><strong>Pickup or delivery</strong><span>Collect at the counter or have it brought to you.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <div class="order-bar" id="cartBar">
+    <span class="count" id="barCount">0</span>
+    <span class="lbl" id="barTotal">0 ETB<small>Your bag</small></span>
+    <button class="btn btn-gold" id="viewCart">Checkout</button>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>
