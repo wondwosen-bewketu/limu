@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>LIMU Coffee — Table QR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { padding: 0; background: var(--cream); }
+    .qr-wrap { min-height: 100svh; display: grid; place-items: center; align-content: center; gap: 20px; padding: 24px 16px; }
+    .controls { width: 100%; max-width: 420px; display: grid; gap: 10px; }
+    .controls input { height: 46px; border-radius: 12px; border: 1px solid var(--line); padding: 0 14px; background: #fff; }
+    .controls .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .card {
+      width: 100%; max-width: 420px; background: var(--forest-900); color: var(--cream);
+      border-radius: 28px; padding: 36px 28px 30px; text-align: center; box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .card::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(226, 196, 143, .35); border-radius: 20px; pointer-events: none; }
+    .card .brand-mark { width: 54px; height: 54px; margin: 0 auto 8px; color: var(--gold-2); }
+    .card .name { letter-spacing: .4em; font-weight: 700; font-size: 22px; margin: 0; }
+    .card .name small { display: block; font-size: 10px; letter-spacing: .6em; opacity: .7; margin-top: 4px; }
+    .card h1 { font-family: var(--serif); font-weight: 600; font-size: 44px; line-height: 1; margin: 18px 0 4px; }
+    .card h1 em { color: var(--gold-2); }
+    .card p { margin: 0 0 22px; opacity: .75; font-size: 14px; }
+    #qr { background: #fff; padding: 16px; border-radius: 18px; display: inline-block; }
+    #qr img, #qr canvas { display: block; width: 240px; height: 240px; }
+    .card .url { margin-top: 16px; font-size: 12px; opacity: .6; word-break: break-all; }
+    .card .table { margin-top: 10px; font-family: var(--serif); font-size: 22px; color: var(--gold-2); min-height: 1em; }
+    @media print {
+      @page { margin: 12mm; }
+      body { background: #fff; }
+      .controls { display: none; }
+      .qr-wrap { min-height: auto; }
+      .card { box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <div class="qr-wrap">
+    <div class="controls">
+      <label class="field"><span style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Menu link</span>
+        <input id="url" type="url"></label>
+      <label class="field"><span style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Table (optional)</span>
+        <input id="table" placeholder="e.g. Table 4"></label>
+      <div class="btns">
+        <button class="btn btn-dark" id="download" type="button">Download QR</button>
+        <button class="btn btn-gold" onclick="print()" type="button">Print card</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="brand-mark" id="logo"></div>
+      <p class="name">LIMU<small>COFFEE</small></p>
+      <h1>Scan for our <em>Menu</em></h1>
+      <p>Point your phone camera at the code</p>
+      <div id="qr"></div>
+      <div class="table" id="tableLabel"></div>
+      <div class="url" id="urlLabel"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    $("#logo").innerHTML = ICONS.logo;
+    const urlIn = $("#url"), tableIn = $("#table");
+    urlIn.value = location.origin + "/";
+    const qr = new QRCode($("#qr"), { width: 480, height: 480, colorDark: "#0a1f19", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
+    function render() {
+      const url = urlIn.value.trim() || location.origin + "/";
+      qr.makeCode(url);
+      $("#urlLabel").textContent = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+      $("#tableLabel").textContent = tableIn.value.trim();
+    }
+    urlIn.addEventListener("input", render);
+    tableIn.addEventListener("input", render);
+    render();
+    $("#download").onclick = () => {
+      const c = $("#qr canvas");
+      const a = document.createElement("a");
+      a.download = "limu-menu-qr.png";
+      a.href = c.toDataURL("image/png");
+      a.click();
+    };
+  </script>
+</body>
+</html>
